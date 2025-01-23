@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using urlShortnerApp.DB;
+using urlShortnerApp.Repositories;
+
 namespace urlShortnerApp;
 
 public class Program
@@ -7,7 +11,11 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
+        
+        //Add DB Service
+        
+        builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Services.AddScoped<IUrlRepository, UrlRepository>();
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
