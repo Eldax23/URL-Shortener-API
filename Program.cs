@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using urlShortnerApp.DB;
 using urlShortnerApp.Repositories;
+using urlShortnerApp.Services;
 
 namespace urlShortnerApp;
 
@@ -19,6 +20,8 @@ public class Program
         builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddScoped<IUrlRepository, UrlRepository>();
         builder.Services.AddScoped<IUrlHelper, UrlHelper>();
+        builder.Services.AddScoped<IUrlService, UrlService>();
+        builder.Services.AddHttpContextAccessor();
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();

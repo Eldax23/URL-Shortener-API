@@ -1,6 +1,6 @@
 namespace urlShortnerApp.Helpers;
 
-public class UrlHelper(IHttpContextAccessor httpContextAccessor) : IUrlHelper
+public class UrlHelper(IHttpContextAccessor httpContextAccessor) : IUrlHelperPersonal
 {
     public string ConstructUrl(string shortUrl)
     {

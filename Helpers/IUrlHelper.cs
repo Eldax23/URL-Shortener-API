@@ -1,6 +1,6 @@
 namespace urlShortnerApp.Helpers;
 
-public interface IUrlHelper
+public interface IUrlHelperPersonal
 {
     string ConstructUrl(string shortUrl);
     string GenerateShortUrl();
