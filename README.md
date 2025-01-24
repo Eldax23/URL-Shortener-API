@@ -51,13 +51,8 @@ The API will be available at `http://localhost:5235`.
 ## Endpoints
 
 ### 1. Shorten URL
-**POST** `/shorten`
+**GET** `/api/Url/shorten`
 
-**Request Body:**
-```json
-{
-    "url": "https://www.facebook.com/"
-}
 ```
 
 **Response:**
@@ -68,9 +63,3 @@ The API will be available at `http://localhost:5235`.
 }
 ```
 
-### 2. Redirect to Original URL
-**GET** `/{shortUrl}`
-
-- Example: `http://localhost:5235/a1b2c3d4`
-
-If the short URL exists, the API redirects to the original URL. If not, it returns a `404 Not Found` response.
