@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using urlShortnerApp.DB;
+using urlShortnerApp.Helpers;
 using urlShortnerApp.Repositories;
 using urlShortnerApp.Services;
+using UrlHelper = Microsoft.AspNetCore.Mvc.Routing.UrlHelper;
 
 namespace urlShortnerApp;
 
@@ -19,7 +20,7 @@ public class Program
         
         builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddScoped<IUrlRepository, UrlRepository>();
-        builder.Services.AddScoped<IUrlHelper, UrlHelper>();
+        builder.Services.AddScoped<IUrlHelperPersonal, UrlPersonalHelper>();
         builder.Services.AddScoped<IUrlService, UrlService>();
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddControllers();
@@ -34,6 +35,12 @@ public class Program
             app.MapOpenApi();
             app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json" , "v1"));
         }
+
+        app.MapGet("/{shortUrl}", async (string shortUrl, IUrlService urlService) =>
+        {
+            string result = await urlService.GetOriginalUrlAsync(shortUrl);
+            return result == null ? Results.NotFound() : Results.Redirect(result);
+        });
 
         app.UseHttpsRedirection();
 

@@ -1,12 +1,12 @@
 namespace urlShortnerApp.Helpers;
 
-public class UrlHelper(IHttpContextAccessor httpContextAccessor) : IUrlHelperPersonal
+public class UrlPersonalHelper(IHttpContextAccessor httpContextAccessor) : IUrlHelperPersonal
 {
     public string ConstructUrl(string shortUrl)
     {
         var request = httpContextAccessor.HttpContext?.Request;
         string baseUrl = $"{request!.Scheme}://{request.Host}";
-        return $"{baseUrl}{shortUrl}";
+        return $"{baseUrl}/{shortUrl}";
     }
 
     public string GenerateShortUrl()

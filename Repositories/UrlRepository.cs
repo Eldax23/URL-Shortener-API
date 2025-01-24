@@ -13,7 +13,7 @@ public class UrlRepository(AppDBContext context) : IUrlRepository
 
     public async Task<URLMapping> GetUrlMappingByUrlAsync(string url)
     {
-        return await context.URLMappings.FirstOrDefaultAsync(m => m.originalURL == url) ?? new URLMapping();
+        return await context.URLMappings.FirstOrDefaultAsync(m => m.originalURL == url) ?? null!;
     }
 
     public async Task<int> SaveMapping(URLMapping mapping)

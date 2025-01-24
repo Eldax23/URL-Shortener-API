@@ -24,7 +24,7 @@ public class UrlService(IUrlHelperPersonal urlHelper , IUrlRepository urlRepo) :
             };
             
             await urlRepo.SaveMapping(urlMapping); 
-            return urlHelper.ConstructUrl(checkUrl!.shortURL);
+            return urlHelper.ConstructUrl(urlMapping!.shortURL);
         }
 
         return urlHelper.ConstructUrl(checkUrl.shortURL); // no need to save it in DB
