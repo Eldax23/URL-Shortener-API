@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using urlShortnerApp.DB.Models;
+using urlShortnerApp.DTOs;
 using urlShortnerApp.Services;
 
 namespace urlShortnerApp.Controllers
@@ -15,7 +17,11 @@ namespace urlShortnerApp.Controllers
             if(shortUrl is null)
                 return BadRequest("this url is invalid");
             
-            return Ok(shortUrl);
+            return Ok(new UrlResponse()
+            {
+                OriginalUrl = url,
+                ShortUrl = shortUrl
+            });
         }
         
         
